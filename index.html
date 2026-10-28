@@ -44,16 +44,17 @@
         }
 
         /* ========================================================================= */
-        /* EXACT LIGHT MODE COLOR PALETTE MATCHING 스크린샷 2026-10-28 222828.png (p.7_라이트) */
+        /* LIGHT THEME SYSTEM-WIDE STYLING (Matching 스크린샷 2026-10-28 222828.png) */
         /* ========================================================================= */
         body.light-theme {
-            background-color: #9bb0d8 !important; /* Page background color */
+            background-color: #9bb0d8 !important; /* System Page Light Blue Background */
             color: #0f172a !important;
         }
 
+        /* Header & Footer in Light Theme */
         body.light-theme header,
         body.light-theme footer {
-            background-color: #809cbf !important; /* Muted header & footer bar color */
+            background-color: #809cbf !important;
             border-color: #6e8cb3 !important;
         }
 
@@ -73,9 +74,11 @@
             background-color: rgba(255, 255, 255, 0.18) !important;
         }
 
-        /* Standard Cards in Light Theme */
+        /* Hero Container & Feature Cards in Light Theme */
+        body.light-theme #heroCard,
+        body.light-theme .feature-card,
         body.light-theme .proto-card {
-            background-color: #7a91b5 !important; /* Slate blue card background */
+            background-color: #7a91b5 !important;
             border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
             color: #ffffff !important;
@@ -85,11 +88,14 @@
         body.light-theme .proto-card span,
         body.light-theme .proto-card button,
         body.light-theme .proto-card div,
-        body.light-theme .proto-card i {
+        body.light-theme .proto-card i,
+        body.light-theme .feature-card h3,
+        body.light-theme .feature-card p,
+        body.light-theme .feature-card span {
             color: #ffffff !important;
         }
 
-        /* Today's Rank Card (Bottom Right Widget) - Pure White with Dark Text */
+        /* Today's Rank Card (Widget) in Light Theme - Pure White Background with Dark Text */
         body.light-theme #rankCard {
             background-color: #ffffff !important;
             border-color: #ffffff !important;
@@ -112,57 +118,44 @@
             border-color: #000000 !important;
         }
 
-        /* Settings Modal (p.6) in Light Theme */
+        /* P.6 Settings Modal in Light Theme */
         body.light-theme .p6-modal-card {
             background-color: #687d9d !important;
             border-color: rgba(255, 255, 255, 0.25) !important;
         }
 
-        /* Home Selection Sub-modal (p.7) in Light Theme */
-        body.light-theme .p7-modal-card {
+        /* P.7, P.8, P.9 Sub-modals in Light Theme */
+        body.light-theme .p7-modal-card,
+        body.light-theme .p8-modal-card,
+        body.light-theme .p9-modal-card {
             background-color: #8fa8cf !important;
             border-color: rgba(255, 255, 255, 0.4) !important;
         }
 
-        /* Laser Beam Scanning Effect for Deepfake */
-        .scan-laser {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #00f2fe, #a855f7, transparent);
-            box-shadow: 0 0 15px #00f2fe, 0 0 25px #a855f7;
-            animation: scanAnim 2.2s infinite ease-in-out;
-        }
-        @keyframes scanAnim {
-            0% { top: 0%; opacity: 0.3; }
-            50% { top: 96%; opacity: 1; }
-            100% { top: 0%; opacity: 0.3; }
-        }
-
-        /* Custom scrollbars */
+        /* Custom Scrollbars */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-track { background: #161e31; }
         ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 99px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
-        /* Default Wireframe Muted Brownish Card Styling */
+        /* Default Dark/Muted Wireframe Card Styling */
         .proto-card {
             background-color: #8d7d7d;
             border: 1.5px solid rgba(0, 242, 254, 0.6);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
         }
 
-        /* p.6 Settings Modal Container Styling */
+        /* P.6 Settings Modal Container Styling */
         .p6-modal-card {
             background-color: #786a68;
             border: 1px solid rgba(255, 255, 255, 0.15);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        /* p.7 Home Selection Sub-modal Styling */
-        .p7-modal-card {
+        /* P.7, P.8, P.9 Sub-modal Container Styling */
+        .p7-modal-card,
+        .p8-modal-card,
+        .p9-modal-card {
             background-color: #bfaea2;
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
@@ -172,7 +165,7 @@
 </head>
 <body id="appBody" class="bg-[#8f9dae] text-slate-100 min-h-screen h-screen flex flex-col overflow-hidden select-none">
 
-    <!-- p.15 NETWORK ERROR SIMULATOR BANNER -->
+    <!-- P.15 NETWORK ERROR SIMULATOR BANNER -->
     <div id="errorBanner" class="hidden bg-slate-900 text-white px-4 py-2 text-xs font-bold flex items-center justify-between border-b border-rose-500/50 z-50 shrink-0">
         <div class="flex items-center gap-2 max-w-6xl mx-auto w-full justify-center text-center">
             <i class="fa-solid fa-wifi-slash text-rose-400 text-sm animate-pulse"></i>
@@ -206,7 +199,7 @@
                 </div>
             </div>
 
-            <!-- RIGHT SIDE: '스미싱 / 딥페이크 / 가짜뉴스' -->
+            <!-- RIGHT SIDE: '스미싱 / 딥페이크 / 가짜뉴스' Navigation -->
             <nav class="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm font-black text-[#00f2fe]">
                 <button onclick="openModal('p1_1_smishingModal')" class="hover:text-white transition focus:outline-none">
                     스미싱
@@ -230,7 +223,7 @@
         <section id="screen_p1_main" class="app-screen flex-1 flex flex-col justify-between py-1 space-y-3">
             
             <!-- HERO VIDEO & TITLE CONTAINER -->
-            <div class="bg-[#161e31] rounded-3xl p-5 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto min-h-[280px]">
+            <div id="heroCard" class="bg-[#161e31] rounded-3xl p-5 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto min-h-[280px]">
                 <div class="max-w-2xl mx-auto w-full space-y-3.5">
                     
                     <!-- PROTOTYPE VIDEO DISPLAY BOX -->
@@ -293,7 +286,7 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-3">
-                    <div onclick="openModal('p1_1_smishingModal')" class="bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-amber-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
+                    <div onclick="openModal('p1_1_smishingModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-amber-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
                         <div class="space-y-1.5">
                             <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
                                 <i class="fa-solid fa-bell-slash"></i>
@@ -311,7 +304,7 @@
                         </div>
                     </div>
 
-                    <div onclick="openModal('p1_2_deepfakeModal')" class="bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-purple-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
+                    <div onclick="openModal('p1_2_deepfakeModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-purple-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
                         <div class="space-y-1.5">
                             <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
                                 <i class="fa-solid fa-glasses"></i>
@@ -329,7 +322,7 @@
                         </div>
                     </div>
 
-                    <div onclick="openModal('p1_3_fakenewsModal')" class="bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-[#00f2fe]/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
+                    <div onclick="openModal('p1_3_fakenewsModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-[#00f2fe]/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
                         <div class="space-y-1.5">
                             <div class="w-9 h-9 rounded-xl bg-[#00f2fe]/10 text-[#00f2fe] flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
                                 <i class="fa-solid fa-newspaper"></i>
@@ -457,7 +450,7 @@
                         </button>
                     </div>
 
-                    <!-- TODAY'S RANKING CARD (Pure White Background in Light Mode - 스크린샷 2026-10-28 222828.png) -->
+                    <!-- TODAY'S RANKING CARD (Widget) -->
                     <div id="rankCard" class="proto-card rounded-2xl p-4 space-y-2 mt-auto">
                         <h3 class="font-black text-lg text-white tracking-wide border-b border-[#00f2fe]/30 pb-1.5">
                             오늘의 순위
@@ -568,9 +561,9 @@
 
     <!-- FOOTER BAR -->
     <footer class="bg-[#03060c] py-2 text-center text-[11px] text-[#00f2fe] font-extrabold shrink-0 border-t border-slate-900">
-        <div class="max-w-[1100px] mx-auto px-4 flex items-center justify-between">
-            <p class="tracking-wider">D-TECTIVE K2J1 이룸 학번</p>
-            <div class="flex items-center gap-3 text-slate-500 text-[10px] font-normal">
+        <div class="max-w-[1100px] mx-auto px-4 flex items-center justify-center relative">
+            <p class="tracking-wider text-center">D-TECTIVE K2J1 &nbsp; 24730030 정제현 25730029 김다영 25730022 김지은</p>
+            <div class="absolute right-4 flex items-center gap-3 text-slate-500 text-[10px] font-normal">
                 <button onclick="toggleErrorBanner()" class="hover:text-amber-400 transition">에러 테스트</button>
                 <span>·</span>
                 <span>PyTorch & Gemini API</span>
@@ -794,7 +787,7 @@
 
 
     <!-- ========================================================================= -->
-    <!-- [MODAL 5: p.6_메인 - SETTINGS MODAL (Exact match to 스크린샷 2026-10-28 203215.png)] -->
+    <!-- [MODAL 5: p.6_메인 - SETTINGS MODAL (Matches 스크린샷 2026-10-28 203215.png)] -->
     <!-- ========================================================================= -->
     <div id="p6_settingsModal" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="p6-modal-card rounded-3xl w-full max-w-lg p-6 relative text-white space-y-6">
@@ -819,7 +812,8 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">고객센터</h4>
                         <div class="space-y-2 text-xs font-bold pl-1">
-                            <button onclick="alert('등록된 공지사항이 없습니다.')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
+                            <!-- Clickable '공지사항' triggers p9_noticeModal (Condition 5) -->
+                            <button onclick="openModal('p9_noticeModal')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
                                 <i class="fa-solid fa-bullhorn text-sm text-slate-200 w-4"></i>
                                 <span>공지사항</span>
                             </button>
@@ -849,7 +843,8 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">내 계정 관리</h4>
                         <div class="space-y-2 text-xs font-bold pl-1">
-                            <button onclick="alert('계정 정보: sewu_sw (인증완료)')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
+                            <!-- Clickable '계정 설정' triggers p8_accountSettingsModal (Condition 4) -->
+                            <button onclick="openModal('p8_accountSettingsModal')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
                                 <i class="fa-regular fa-circle-user text-sm text-slate-200 w-4"></i>
                                 <span>계정 설정</span>
                             </button>
@@ -865,7 +860,7 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">앱 테마</h4>
                         <div class="pl-1">
-                            <!-- Clickable '홈 화면 선택' triggers p.7_homeScreenModal -->
+                            <!-- Clickable '홈 화면 선택' triggers p7_homeScreenModal -->
                             <button onclick="openModal('p7_homeScreenModal')" class="flex items-center gap-3 text-xs font-bold text-white hover:text-[#00f2fe] transition w-full text-left group">
                                 <i class="fa-solid fa-paintbrush text-sm text-slate-200 w-4 group-hover:scale-110 transition"></i>
                                 <span class="font-bold">홈 화면 선택</span>
@@ -902,7 +897,7 @@
                 <!-- Puzzle Piece Theme Visual Options -->
                 <div class="grid grid-cols-2 gap-4 py-3 items-center justify-center text-center">
                     
-                    <!-- Choice 1: 라이트 Theme (Triggers 스크린샷 2026-10-28 222828.png colors - p.7_라이트) -->
+                    <!-- Choice 1: 라이트 Theme (Condition 6: Triggers system-wide light theme matching 스크린샷 2026-10-28 222828.png) -->
                     <div onclick="setAppTheme('light')" class="flex flex-col items-center cursor-pointer group">
                         <div id="boxThemeLight" class="w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80">
                             <!-- Puzzle Piece Graphic Light -->
@@ -933,6 +928,85 @@
                     </div>
 
                 </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- [MODAL 7: p.8_메인 - ACCOUNT SETTINGS SUB-MODAL (Exact match to 스크린샷 2026-10-28 230503.png)] -->
+    <!-- ========================================================================= -->
+    <div id="p8_accountSettingsModal" class="hidden fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="p8-modal-card rounded-2xl w-full max-w-xs sm:max-w-sm p-5 relative space-y-4">
+            
+            <!-- Header with Title & Close 'X' Button -->
+            <div class="flex items-center justify-between border-b border-white/20 pb-2">
+                <span class="text-xs sm:text-sm font-bold text-white">계정설정</span>
+                <button onclick="closeModal('p8_accountSettingsModal')" class="text-white hover:text-rose-300 text-xs font-bold px-1 transition">
+                    X
+                </button>
+            </div>
+
+            <!-- Content Body -->
+            <div class="space-y-4 text-xs font-bold text-white px-1">
+                
+                <!-- Section 1: 내 정보 -->
+                <div class="space-y-2">
+                    <h5 class="text-[11px] font-bold text-slate-100">내 정보</h5>
+                    <div class="space-y-1.5 pl-2 text-[11px]">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-200">아이디</span>
+                            <span class="text-white font-mono">sewu_sw</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-200">비밀번호</span>
+                            <span class="text-white tracking-widest font-mono">••••••••</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: 로그인 정보 -->
+                <div class="space-y-2 pt-1 border-t border-white/10">
+                    <h5 class="text-[11px] font-bold text-slate-100">로그인 정보</h5>
+                    <div class="pl-2 text-[11px]">
+                        <span class="text-slate-200">연결된 계정 없음</span>
+                    </div>
+                </div>
+
+                <!-- Section 3: Bottom Action Links -->
+                <div class="flex items-center justify-between pt-3 text-[10.5px] text-slate-200 border-t border-white/10">
+                    <button onclick="alert('비밀번호 변경 안내가 이메일로 전송되었습니다.')" class="hover:text-white hover:underline transition">
+                        비밀번호 수정하기
+                    </button>
+                    <button onclick="if(confirm('정말 탈퇴하시겠습니까?')) { alert('탈퇴 처리되었습니다.'); logoutSimulate(); closeModal('p8_accountSettingsModal'); closeModal('p6_settingsModal'); }" class="hover:text-rose-300 hover:underline transition">
+                        탈퇴하기
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================================================= -->
+    <!-- [MODAL 8: p.9_메인 - NOTICE SUB-MODAL (Exact match to 스크린샷 2026-10-28 230510.png)] -->
+    <!-- ========================================================================= -->
+    <div id="p9_noticeModal" class="hidden fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="p9-modal-card rounded-2xl w-full max-w-xs sm:max-w-sm p-5 relative space-y-4">
+            
+            <!-- Header with Title & Close 'X' Button -->
+            <div class="flex items-center justify-between border-b border-white/20 pb-2">
+                <span class="text-xs sm:text-sm font-bold text-white">공지사항</span>
+                <button onclick="closeModal('p9_noticeModal')" class="text-white hover:text-rose-300 text-xs font-bold px-1 transition">
+                    X
+                </button>
+            </div>
+
+            <!-- Content Area: Centered Notice Message -->
+            <div class="py-10 text-center text-xs font-bold text-white/90">
+                <p>등록된 공지사항이 없습니다.</p>
             </div>
 
         </div>
@@ -995,7 +1069,7 @@
             }
         }
 
-        // Theme Switcher for p.7_homeScreenModal (Light Theme matching 스크린샷 2026-10-28 222828.png)
+        // System-wide Theme Switcher for p.7_homeScreenModal (Light Theme matching 스크린샷 2026-10-28 222828.png)
         function setAppTheme(themeType) {
             const body = document.getElementById('appBody');
             const radioLight = document.getElementById('radioThemeLight');
