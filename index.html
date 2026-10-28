@@ -40,13 +40,88 @@
             font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
             background-color: #8f9dae;
             color: #f8fafc;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Light mode override for body */
+        /* ========================================================================= */
+        /* EXACT LIGHT MODE COLOR PALETTE MATCHING 스크린샷 2026-10-28 222828.png (p.7_라이트) */
+        /* ========================================================================= */
         body.light-theme {
-            background-color: #97acd6 !important;
-            color: #0f172a;
+            background-color: #9bb0d8 !important; /* Page background color */
+            color: #0f172a !important;
+        }
+
+        body.light-theme header,
+        body.light-theme footer {
+            background-color: #809cbf !important; /* Muted header & footer bar color */
+            border-color: #6e8cb3 !important;
+        }
+
+        body.light-theme header button,
+        body.light-theme header nav button,
+        body.light-theme header nav span,
+        body.light-theme footer p,
+        body.light-theme footer button,
+        body.light-theme footer span {
+            color: #ffffff !important;
+        }
+
+        body.light-theme #headerAuthLoggedOut button,
+        body.light-theme #headerAuthLoggedIn button:first-child {
+            border-color: #ffffff !important;
+            color: #ffffff !important;
+            background-color: rgba(255, 255, 255, 0.18) !important;
+        }
+
+        /* Standard Cards in Light Theme */
+        body.light-theme .proto-card {
+            background-color: #7a91b5 !important; /* Slate blue card background */
+            border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+            color: #ffffff !important;
+        }
+
+        body.light-theme .proto-card h3,
+        body.light-theme .proto-card span,
+        body.light-theme .proto-card button,
+        body.light-theme .proto-card div,
+        body.light-theme .proto-card i {
+            color: #ffffff !important;
+        }
+
+        /* Today's Rank Card (Bottom Right Widget) - Pure White with Dark Text */
+        body.light-theme #rankCard {
+            background-color: #ffffff !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        body.light-theme #rankCard h3,
+        body.light-theme #rankCard li,
+        body.light-theme #rankCard span {
+            color: #0f172a !important;
+        }
+
+        body.light-theme #rankCard h3 {
+            border-color: #cbd5e1 !important;
+        }
+
+        /* AI Detective Link Button in Light Theme */
+        body.light-theme #aiDetectiveBtn {
+            color: #000000 !important;
+            border-color: #000000 !important;
+        }
+
+        /* Settings Modal (p.6) in Light Theme */
+        body.light-theme .p6-modal-card {
+            background-color: #687d9d !important;
+            border-color: rgba(255, 255, 255, 0.25) !important;
+        }
+
+        /* Home Selection Sub-modal (p.7) in Light Theme */
+        body.light-theme .p7-modal-card {
+            background-color: #8fa8cf !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
         }
 
         /* Laser Beam Scanning Effect for Deepfake */
@@ -72,14 +147,14 @@
         ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 99px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
-        /* Wireframe Exact Muted Brownish Card Styling */
+        /* Default Wireframe Muted Brownish Card Styling */
         .proto-card {
             background-color: #8d7d7d;
             border: 1.5px solid rgba(0, 242, 254, 0.6);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
         }
 
-        /* p.6 Settings Modal Exact Container Styling */
+        /* p.6 Settings Modal Container Styling */
         .p6-modal-card {
             background-color: #786a68;
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -108,7 +183,7 @@
         </button>
     </div>
 
-    <!-- MAIN TOP HEADER (Matches Source 15 / 16) -->
+    <!-- MAIN TOP HEADER -->
     <header class="w-full bg-[#03060c] py-3.5 px-6 sm:px-12 shrink-0 z-40 border-b border-slate-900">
         <div class="max-w-[1100px] mx-auto flex items-center justify-between">
             
@@ -131,7 +206,7 @@
                 </div>
             </div>
 
-            <!-- RIGHT SIDE: ONLY '스미싱 / 딥페이크 / 가짜뉴스' in bright cyan font (#00f2fe) -->
+            <!-- RIGHT SIDE: '스미싱 / 딥페이크 / 가짜뉴스' -->
             <nav class="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm font-black text-[#00f2fe]">
                 <button onclick="openModal('p1_1_smishingModal')" class="hover:text-white transition focus:outline-none">
                     스미싱
@@ -377,36 +452,36 @@
                     
                     <!-- AI Detective Link Header -->
                     <div class="text-left pt-0">
-                        <button onclick="showScreen('p5_aichat')" class="text-base sm:text-lg font-black text-[#00f2fe] border-b-2 border-[#00f2fe] pb-0.5 tracking-tight hover:brightness-125 transition inline-block">
+                        <button id="aiDetectiveBtn" onclick="showScreen('p5_aichat')" class="text-base sm:text-lg font-black text-[#00f2fe] border-b-2 border-[#00f2fe] pb-0.5 tracking-tight hover:brightness-125 transition inline-block">
                             AI 탐정과 대화하러 가기
                         </button>
                     </div>
 
-                    <!-- TODAY'S RANKING CARD (Bottom Aligned) -->
-                    <div class="proto-card rounded-2xl p-4 space-y-2 mt-auto">
+                    <!-- TODAY'S RANKING CARD (Pure White Background in Light Mode - 스크린샷 2026-10-28 222828.png) -->
+                    <div id="rankCard" class="proto-card rounded-2xl p-4 space-y-2 mt-auto">
                         <h3 class="font-black text-lg text-white tracking-wide border-b border-[#00f2fe]/30 pb-1.5">
                             오늘의 순위
                         </h3>
 
                         <ol class="space-y-1.5 text-xs font-black text-white pt-1">
                             <li class="flex items-center gap-2">
-                                <span class="text-white">1.</span>
+                                <span>1.</span>
                                 <span>택배 배송 사칭 스미싱</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-white">2.</span>
+                                <span>2.</span>
                                 <span>소상공인 지원금 피싱</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-white">3.</span>
+                                <span>3.</span>
                                 <span>유명인 딥페이크 광고</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-white">4.</span>
+                                <span>4.</span>
                                 <span>모바일 청첩장 악성 앱</span>
                             </li>
                             <li class="flex items-center gap-2">
-                                <span class="text-white">5.</span>
+                                <span>5.</span>
                                 <span>긴급 수당 가짜뉴스</span>
                             </li>
                         </ol>
@@ -507,6 +582,98 @@
     <!-- ========================================================================= -->
     <!-- MODAL OVERLAYS & DIALOGS -->
     <!-- ========================================================================= -->
+
+    <!-- [MODAL 1: p.1-1_메인 - 스미싱 문자 분석 상세 모달] -->
+    <div id="p1_1_smishingModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-5 relative shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                        <i class="fa-solid fa-bell-slash text-sm"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-black text-white">p.1-1 스미싱 문자 분석 결과</h2>
+                        <p class="text-[11px] text-slate-400">악성 URL 사칭 패턴 및 위협 유형 상세 분석</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('p1_1_smishingModal')" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="bg-[#0d1322] rounded-2xl p-3 border border-slate-800 space-y-1.5">
+                <p class="text-xs text-slate-200 font-mono bg-slate-900/80 p-2.5 rounded-xl border border-slate-800 break-all">
+                    [국제발송] 고객님의 택배 배송 주소지가 불분명하여 배송이 중단되었습니다.<br>
+                    <span class="text-rose-400 underline font-bold">http://kr-post-delivery-check.top/track?id=92810</span>
+                </p>
+            </div>
+
+            <div class="bg-rose-950/20 border border-rose-500/40 rounded-2xl p-3 space-y-1.5 text-xs">
+                <div class="flex items-center justify-between">
+                    <span class="font-black text-rose-400 uppercase tracking-wider flex items-center gap-1.5 text-[11px]">
+                        <i class="fa-solid fa-triangle-exclamation animate-bounce"></i>
+                        AI 분석 결과: 스미싱 위험도 '매우 높음'
+                    </span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-rose-500 text-slate-950 font-black text-[10px]">98% 위험</span>
+                </div>
+                <ul class="text-slate-300 space-y-1 list-disc list-inside leading-relaxed text-[11px]">
+                    <li>URL 패턴 분석: 불분명한 단축 URL 도메인.</li>
+                    <li>접속 위험성: 원격 조작 소액결제 유출 위험.</li>
+                </ul>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-3 items-center bg-[#0d1322] rounded-2xl p-3 border border-slate-800">
+                <div class="flex flex-col items-center justify-center p-1">
+                    <div class="w-28 h-28 relative">
+                        <canvas id="smishingModalChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-1.5 text-[11px]">
+                    <div class="flex justify-between items-center bg-slate-900/60 p-2 rounded-lg">
+                        <span>개인정보 탈취</span><strong class="text-rose-400">약 47%</strong>
+                    </div>
+                    <div class="flex justify-between items-center bg-slate-900/60 p-2 rounded-lg">
+                        <span>소액 인출 위험</span><strong class="text-amber-400">약 24%</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- [MODAL 2: p.1-2_메인 - 딥페이크 탐지 상세 모달] -->
+    <div id="p1_2_deepfakeModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-xl p-5 relative shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                <h2 class="text-sm font-black text-white">p.1-2 딥페이크 이미지 탐지 분석</h2>
+                <button onclick="closeModal('p1_2_deepfakeModal')" class="w-7 h-7 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-4 bg-[#0d1322] rounded-2xl text-xs space-y-2 border border-slate-800">
+                <p class="text-purple-300 font-bold">PyTorch Visual Mesh 분석 완료</p>
+                <p class="text-slate-300">합성 왜곡 확률: <strong class="text-rose-400">88% HIGH RISK</strong></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- [MODAL 3: p.1-3_메인 - 가짜뉴스 검증 상세 모달] -->
+    <div id="p1_3_fakenewsModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-xl p-5 relative shadow-2xl space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                <h2 class="text-sm font-black text-white">p.1-3 가짜뉴스 팩트체크 분석</h2>
+                <button onclick="closeModal('p1_3_fakenewsModal')" class="w-7 h-7 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="p-4 bg-[#0d1322] rounded-2xl text-xs space-y-2 border border-slate-800">
+                <p class="text-[#00f2fe] font-bold">주요 언론사 교차 보도 분석</p>
+                <p class="text-amber-400 font-bold">의심 지수: 94%</p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- [MODAL 4: p.2_메인 - 로그인 모달 (스크린샷 2026-10-28 213856.png)] -->
     <div id="p2_loginModal" class="hidden fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
@@ -627,12 +794,12 @@
 
 
     <!-- ========================================================================= -->
-    <!-- [MODAL 5: p.6_메인 - SETTINGS MODAL (Exact match to Source 15 - 스크린샷 2026-10-28 203215.png)] -->
+    <!-- [MODAL 5: p.6_메인 - SETTINGS MODAL (Exact match to 스크린샷 2026-10-28 203215.png)] -->
     <!-- ========================================================================= -->
     <div id="p6_settingsModal" class="hidden fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="p6-modal-card rounded-3xl w-full max-w-lg p-6 relative text-white space-y-6">
             
-            <!-- Top Left Back Curved Arrow Button (Condition 5) -->
+            <!-- Top Left Back Curved Arrow Button -->
             <div class="flex items-center justify-between">
                 <button onclick="closeModal('p6_settingsModal')" class="text-slate-200 hover:text-white transition focus:outline-none">
                     <svg viewBox="0 0 24 24" class="w-6 h-6 fill-none stroke-current stroke-[2.5]" stroke-linecap="round" stroke-linejoin="round">
@@ -642,7 +809,7 @@
                 </button>
             </div>
 
-            <!-- 2-Column Grid Layout (Exact Match to Source 15) -->
+            <!-- 2-Column Grid Layout -->
             <div class="grid grid-cols-2 gap-8 px-2 pb-2">
                 
                 <!-- LEFT COLUMN -->
@@ -698,7 +865,7 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">앱 테마</h4>
                         <div class="pl-1">
-                            <!-- Clickable '홈 화면 선택' triggers p.7_homeScreenModal (Condition 6) -->
+                            <!-- Clickable '홈 화면 선택' triggers p.7_homeScreenModal -->
                             <button onclick="openModal('p7_homeScreenModal')" class="flex items-center gap-3 text-xs font-bold text-white hover:text-[#00f2fe] transition w-full text-left group">
                                 <i class="fa-solid fa-paintbrush text-sm text-slate-200 w-4 group-hover:scale-110 transition"></i>
                                 <span class="font-bold">홈 화면 선택</span>
@@ -715,7 +882,7 @@
 
 
     <!-- ========================================================================= -->
-    <!-- [MODAL 6: p.7_메인 - HOME SCREEN SELECTION SUB-MODAL (Exact match to Source 16 - 스크린샷 2026-10-28 203223.png)] -->
+    <!-- [MODAL 6: p.7_메인 - HOME SCREEN SELECTION SUB-MODAL (Matches 스크린샷 2026-10-28 220731.png & 220723.png)] -->
     <!-- ========================================================================= -->
     <div id="p7_homeScreenModal" class="hidden fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
         <div class="p7-modal-card rounded-2xl w-full max-w-sm p-5 relative space-y-4">
@@ -735,9 +902,9 @@
                 <!-- Puzzle Piece Theme Visual Options -->
                 <div class="grid grid-cols-2 gap-4 py-3 items-center justify-center text-center">
                     
-                    <!-- Choice 1: 라이트 Theme -->
+                    <!-- Choice 1: 라이트 Theme (Triggers 스크린샷 2026-10-28 222828.png colors - p.7_라이트) -->
                     <div onclick="setAppTheme('light')" class="flex flex-col items-center cursor-pointer group">
-                        <div class="w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/30 group-hover:border-white transition shadow">
+                        <div id="boxThemeLight" class="w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80">
                             <!-- Puzzle Piece Graphic Light -->
                             <div class="grid grid-cols-2 gap-1 w-full h-full items-center justify-center">
                                 <div class="w-6 h-6 bg-[#fefefe] rounded-md shadow-sm"></div>
@@ -752,7 +919,7 @@
 
                     <!-- Choice 2: 기본 (Default Cyber Dark Theme) -->
                     <div onclick="setAppTheme('default')" class="flex flex-col items-center cursor-pointer group">
-                        <div class="w-20 h-16 relative bg-black/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/30 group-hover:border-white transition shadow">
+                        <div id="boxThemeDefault" class="w-20 h-16 relative bg-black/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border-2 border-white shadow-lg transition">
                             <!-- Puzzle Piece Graphic Default -->
                             <div class="grid grid-cols-2 gap-1 w-full h-full items-center justify-center">
                                 <div class="w-6 h-6 bg-[#00f2fe] rounded-md shadow-sm"></div>
@@ -828,20 +995,26 @@
             }
         }
 
-        // Theme Switcher for p.7_homeScreenModal
+        // Theme Switcher for p.7_homeScreenModal (Light Theme matching 스크린샷 2026-10-28 222828.png)
         function setAppTheme(themeType) {
             const body = document.getElementById('appBody');
             const radioLight = document.getElementById('radioThemeLight');
             const radioDefault = document.getElementById('radioThemeDefault');
+            const boxLight = document.getElementById('boxThemeLight');
+            const boxDefault = document.getElementById('boxThemeDefault');
 
             if (themeType === 'light') {
                 body.classList.add('light-theme');
                 if (radioLight) radioLight.checked = true;
                 if (radioDefault) radioDefault.checked = false;
+                if (boxLight) boxLight.className = "w-20 h-16 relative bg-white/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border-2 border-white shadow-lg transition";
+                if (boxDefault) boxDefault.className = "w-20 h-16 relative bg-black/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80";
             } else {
                 body.classList.remove('light-theme');
                 if (radioLight) radioLight.checked = false;
                 if (radioDefault) radioDefault.checked = true;
+                if (boxLight) boxLight.className = "w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80";
+                if (boxDefault) boxDefault.className = "w-20 h-16 relative bg-black/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border-2 border-white shadow-lg transition";
             }
         }
 
