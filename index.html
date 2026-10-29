@@ -77,7 +77,8 @@
         /* Hero Container & Feature Cards in Light Theme */
         body.light-theme #heroCard,
         body.light-theme .feature-card,
-        body.light-theme .proto-card {
+        body.light-theme .proto-card,
+        body.light-theme .info-modal-card {
             background-color: #7a91b5 !important;
             border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
@@ -132,11 +133,71 @@
             border-color: rgba(255, 255, 255, 0.4) !important;
         }
 
+        /* ========================================================================= */
+        /* AI CHAT SCREEN STYLING (Matches 스크린샷 2026-10-29 210049.png & 210058.png) */
+        /* ========================================================================= */
+        #p5_aichat_sidebar {
+            background-color: #857979 !important;
+            border-right: 2px solid #00f2fe !important;
+        }
+        #p5_aichat_sidebar .title-text {
+            color: #00f2fe !important;
+        }
+        #p5_aichat_sidebar .plus-btn {
+            border: 2px solid #00f2fe !important;
+            color: #00f2fe !important;
+        }
+
+        #p5_aichat_main {
+            background-color: #675c5c !important;
+        }
+
+        .chat-bubble-ai {
+            background-color: #c5c8d0 !important;
+            color: #0f172a !important;
+            border-radius: 1.25rem;
+            border-bottom-left-radius: 0.25rem;
+        }
+
+        .chat-bubble-user {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-radius: 1.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+
+        /* Light Theme Overrides for Chat Screen (Matching 스크린샷 2026-10-29 210058.png) */
+        body.light-theme #p5_aichat_sidebar {
+            background-color: #98a4c8 !important;
+            border-right: 2px solid rgba(255, 255, 255, 0.6) !important;
+        }
+        body.light-theme #p5_aichat_sidebar .title-text {
+            color: #ffffff !important;
+        }
+        body.light-theme #p5_aichat_sidebar .plus-btn {
+            border: 2px solid #ffffff !important;
+            color: #ffffff !important;
+        }
+
+        body.light-theme #p5_aichat_main {
+            background-color: #b0bfe8 !important;
+        }
+
+        body.light-theme .chat-bubble-ai {
+            background-color: #f3f19d !important;
+            color: #0f172a !important;
+        }
+
+        body.light-theme .chat-bubble-user {
+            background-color: #fbcfe8 !important;
+            color: #0f172a !important;
+        }
+
         /* Custom Scrollbars */
         ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: #161e31; }
-        ::-webkit-scrollbar-thumb { background: #00f2fe; border-radius: 99px; }
-        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.3); border-radius: 99px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.5); }
 
         /* Default Dark/Muted Wireframe Card Styling */
         .proto-card {
@@ -201,15 +262,15 @@
 
             <!-- RIGHT SIDE: '스미싱 / 딥페이크 / 가짜뉴스' Navigation -->
             <nav class="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm font-black text-[#00f2fe]">
-                <button onclick="openModal('p1_1_smishingModal')" class="hover:text-white transition focus:outline-none">
+                <button onclick="openSmishingTechInfo()" class="hover:text-white transition focus:outline-none">
                     스미싱
                 </button>
                 <span class="text-[#00f2fe]/60">/</span>
-                <button onclick="openModal('p1_2_deepfakeModal')" class="hover:text-white transition focus:outline-none">
+                <button onclick="openDeepfakeTechInfo()" class="hover:text-white transition focus:outline-none">
                     딥페이크
                 </button>
                 <span class="text-[#00f2fe]/60">/</span>
-                <button onclick="openModal('p1_3_fakenewsModal')" class="hover:text-white transition focus:outline-none">
+                <button onclick="openFakenewsTechInfo()" class="hover:text-white transition focus:outline-none">
                     가짜뉴스
                 </button>
             </nav>
@@ -220,22 +281,22 @@
     <main class="flex-1 w-full max-w-[1100px] mx-auto px-4 sm:px-6 py-4 flex flex-col justify-center overflow-hidden relative">
 
         <!-- ================= [PAGE 1: MAIN LANDING HERO (p.1_메인)] ================= -->
-        <section id="screen_p1_main" class="app-screen flex-1 flex flex-col justify-between py-1 space-y-3">
+        <section id="screen_p1_main" class="app-screen flex-1 flex flex-col justify-center py-2 space-y-4">
             
             <!-- HERO VIDEO & TITLE CONTAINER -->
-            <div id="heroCard" class="bg-[#161e31] rounded-3xl p-5 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto min-h-[280px]">
-                <div class="max-w-2xl mx-auto w-full space-y-3.5">
+            <div id="heroCard" class="bg-[#161e31] rounded-3xl p-6 sm:p-8 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto min-h-[360px] max-w-3xl mx-auto w-full">
+                <div class="max-w-2xl mx-auto w-full space-y-5">
                     
                     <!-- PROTOTYPE VIDEO DISPLAY BOX -->
-                    <div id="videoContainer" onclick="toggleDemoVideo()" class="bg-[#0d1322]/90 rounded-2xl p-4 border border-slate-700 shadow-inner flex flex-col items-center justify-center min-h-[160px] relative group cursor-pointer transition-all hover:border-[#00f2fe]">
+                    <div id="videoContainer" onclick="toggleDemoVideo()" class="bg-[#0d1322]/90 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center justify-center min-h-[180px] relative group cursor-pointer transition-all hover:border-[#00f2fe]">
                         <div id="videoPlaceholder" class="space-y-2">
-                            <div class="w-10 h-10 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-lg mx-auto border border-[#00f2fe]/40 group-hover:scale-110 transition shadow-lg">
+                            <div class="w-11 h-11 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-xl mx-auto border border-[#00f2fe]/40 group-hover:scale-110 transition shadow-lg">
                                 <i class="fa-solid fa-play ml-0.5"></i>
                             </div>
-                            <p class="text-sm sm:text-base font-black text-white tracking-wide">
+                            <p class="text-base sm:text-lg font-black text-white tracking-wide">
                                 기능 및 웹서비스 소개 영상(로고)
                             </p>
-                            <p class="text-[10px] text-slate-400">클릭하여 D-TECTIVE 웹서비스 시연 영상 재생</p>
+                            <p class="text-xs text-slate-400">클릭하여 D-TECTIVE 웹서비스 시연 영상 재생</p>
                         </div>
 
                         <!-- Video Element Overlay -->
@@ -251,10 +312,10 @@
 
                     <!-- TITLE & LOGO -->
                     <div>
-                        <h1 class="text-2xl sm:text-4xl font-black text-white tracking-wider font-sans">
+                        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-wider font-sans">
                             D-TECTIVE
                         </h1>
-                        <p class="text-[11px] text-slate-400 mt-0.5 font-medium">
+                        <p class="text-xs sm:text-sm text-slate-300 mt-1 font-medium">
                             AI 기반 스미싱 · 딥페이크 · 가짜뉴스 통합 탐지 시스템
                         </p>
                     </div>
@@ -263,82 +324,13 @@
                     <div class="max-w-md mx-auto">
                         <div class="bg-[#0d1322] rounded-2xl p-1.5 shadow-xl flex items-center gap-2 border border-slate-700">
                             <i class="fa-solid fa-magnifying-glass text-slate-400 ml-3 text-xs"></i>
-                            <input type="text" id="unifiedInput" placeholder="의심되는 문자, 뉴스 제목 또는 URL을 입력하세요..." class="w-full bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none py-1">
+                            <input type="text" id="unifiedInput" placeholder="의심되는 문자, 뉴스 제목 또는 URL을 입력하세요..." class="w-full bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none py-1.5">
                             <button onclick="runUnifiedSearch()" class="px-4 py-1.5 rounded-xl bg-[#00f2fe] text-slate-950 font-black text-xs whitespace-nowrap hover:brightness-110 transition shadow">
                                 통합 탐지 시작
                             </button>
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <!-- ================= [MIDDLE CAPSULE BAR & 3 FEATURE CARDS] ================= -->
-            <div class="space-y-2.5">
-                <div class="bg-[#161e31]/80 rounded-full px-4 py-2 border border-[#232f48] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-300">
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-[#00f2fe] animate-ping"></span>
-                        <span class="font-bold text-[#00f2fe]">D-TECTIVE 대표 기술 및 소개</span>
-                    </div>
-                    <span class="text-[10px] text-slate-400">
-                        PyTorch Visual Mesh · Gemini AI LLM · Phishing URL DB
-                    </span>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-3">
-                    <div onclick="openModal('p1_1_smishingModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-amber-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
-                        <div class="space-y-1.5">
-                            <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
-                                <i class="fa-solid fa-bell-slash"></i>
-                            </div>
-                            <h3 class="font-bold text-sm text-white">스미싱 문자 분석</h3>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">
-                                택배 사칭, 모바일 청첩장, 소상공인 지원금 문자 악성 URL 및 금융 사기 문맥 분석
-                            </p>
-                        </div>
-                        <div class="pt-2">
-                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-amber-400 group-hover:underline">
-                                <span>분석 시작하기</span>
-                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div onclick="openModal('p1_2_deepfakeModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-purple-500/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
-                        <div class="space-y-1.5">
-                            <div class="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
-                                <i class="fa-solid fa-glasses"></i>
-                            </div>
-                            <h3 class="font-bold text-sm text-white">딥페이크 탐지</h3>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">
-                                얼굴 가열도(Heatmap) 및 랜드마크 메쉬 오버레이를 활용한 이미지 변조 분석
-                            </p>
-                        </div>
-                        <div class="pt-2">
-                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-purple-400 group-hover:underline">
-                                <span>이미지 검사하기</span>
-                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div onclick="openModal('p1_3_fakenewsModal')" class="feature-card bg-[#161e31] rounded-2xl p-4 border border-[#232f48] hover:border-[#00f2fe]/60 shadow-lg cursor-pointer flex flex-col justify-between group transition">
-                        <div class="space-y-1.5">
-                            <div class="w-9 h-9 rounded-xl bg-[#00f2fe]/10 text-[#00f2fe] flex items-center justify-center text-base font-bold group-hover:scale-110 transition">
-                                <i class="fa-solid fa-newspaper"></i>
-                            </div>
-                            <h3 class="font-bold text-sm text-white">가짜뉴스 검증</h3>
-                            <p class="text-[11px] text-slate-400 leading-relaxed">
-                                주요 언론사 보도 교차 검증 및 AI 출처 신뢰도 팩트체크 분석
-                            </p>
-                        </div>
-                        <div class="pt-2">
-                            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-[#00f2fe] group-hover:underline">
-                                <span>뉴스 검증하기</span>
-                                <i class="fa-solid fa-arrow-right text-[9px]"></i>
-                            </span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -424,15 +416,15 @@
                         </h3>
                         
                         <div class="flex-1 overflow-y-auto my-1.5 space-y-2 pr-1 text-xs">
-                            <div onclick="openModal('p1_1_smishingModal')" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
+                            <div onclick="openSmishingTechInfo()" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
                                 <span class="font-bold text-white">택배 배송 사칭 스미싱 검사</span>
                                 <span class="text-rose-400 font-extrabold text-[10px]">위험 98%</span>
                             </div>
-                            <div onclick="openModal('p1_2_deepfakeModal')" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
+                            <div onclick="openDeepfakeTechInfo()" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
                                 <span class="font-bold text-white">딥페이크 인물 이미지 검사</span>
                                 <span class="text-purple-300 font-extrabold text-[10px]">위험 88%</span>
                             </div>
-                            <div onclick="openModal('p1_3_fakenewsModal')" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
+                            <div onclick="openFakenewsTechInfo()" class="bg-black/25 p-2.5 rounded-xl border border-[#00f2fe]/20 hover:border-[#00f2fe] cursor-pointer flex items-center justify-between transition">
                                 <span class="font-bold text-white">소상공인 가짜뉴스 검증</span>
                                 <span class="text-amber-300 font-extrabold text-[10px]">의심 94%</span>
                             </div>
@@ -487,71 +479,67 @@
         </section>
 
 
-        <!-- ================= [PAGE 5: AI DETECTIVE CHAT SCREEN (p.5_aichat)] ================= -->
-        <section id="screen_p5_aichat" class="app-screen hidden flex-1 flex flex-col justify-between py-1 space-y-3">
-            <div class="bg-[#161e31] border border-[#232f48] rounded-3xl p-4 flex-1 flex flex-col shadow-2xl overflow-hidden relative">
+        <!-- ================= [PAGE 5: AI DETECTIVE CHAT SCREEN (Matches 스크린샷 2026-10-29 210049.png & 210058.png)] ================= -->
+        <section id="screen_p5_aichat" class="app-screen hidden flex-1 flex flex-col justify-between my-auto h-[420px] sm:h-[460px] overflow-hidden rounded-2xl shadow-2xl border border-white/10">
+            <div class="flex-1 flex overflow-hidden w-full relative h-full">
                 
-                <!-- Chat Screen Top Bar -->
-                <div class="flex items-center justify-between border-b border-slate-800 pb-2.5 shrink-0">
-                    <div class="flex items-center gap-3">
-                        <button onclick="showScreen('p4_main')" class="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
-                            <i class="fa-solid fa-arrow-left"></i>
-                        </button>
-                        <div class="w-8 h-8 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center border border-[#00f2fe]/40">
-                            <i class="fa-solid fa-user-secret text-sm"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-black text-white text-xs sm:text-sm flex items-center gap-2">
-                                <span>AI 탐정 1:1 대화</span>
-                                <span class="text-[9px] bg-[#00f2fe]/20 text-[#00f2fe] px-2 py-0.5 rounded-full font-bold">Gemini API</span>
-                            </h3>
-                            <p class="text-[10px] text-emerald-400 font-semibold flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-                                실시간 추론 준비 완료
-                            </p>
+                <!-- LEFT SIDEBAR: AI 탐정 목록 -->
+                <div id="p5_aichat_sidebar" class="w-44 sm:w-52 shrink-0 p-4 flex flex-col justify-between relative transition-colors duration-300">
+                    <div class="space-y-3">
+                        <h3 class="title-text font-black text-sm sm:text-base tracking-tight">
+                            AI 탐정 목록
+                        </h3>
+                        <!-- Session List -->
+                        <div id="aiDetectiveList" class="space-y-2 text-xs font-bold">
+                            <div class="p-2.5 rounded-xl bg-black/20 text-white flex items-center gap-2 border border-white/20">
+                                <i class="fa-solid fa-user-secret text-xs"></i>
+                                <span class="truncate">기본 AI 탐정 대화</span>
+                            </div>
                         </div>
                     </div>
 
-                    <button onclick="showScreen('p4_main')" class="px-3 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
-                        마이페이지로
+                    <!-- Bottom Left Circle Plus Button -->
+                    <button onclick="createNewAIChatSession()" class="plus-btn w-10 h-10 rounded-full border-2 flex items-center justify-center text-xl font-bold hover:scale-105 transition shadow-md focus:outline-none">
+                        <i class="fa-solid fa-plus"></i>
                     </button>
                 </div>
 
-                <!-- Chat Messages Scroll Log -->
-                <div id="p5ChatLog" class="flex-1 overflow-y-auto p-2 space-y-2.5 text-xs my-2">
-                    <div class="flex gap-2 items-start">
-                        <div class="w-7 h-7 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-xs shrink-0 border border-[#00f2fe]/40">
-                            <i class="fa-solid fa-user-secret"></i>
+                <!-- RIGHT MAIN CHAT AREA -->
+                <div id="p5_aichat_main" class="flex-1 flex flex-col justify-between p-4 sm:p-6 overflow-hidden relative transition-colors duration-300">
+                    
+                    <!-- CHAT MESSAGES CONTAINER -->
+                    <div id="p5ChatLog" class="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 text-xs sm:text-sm font-medium">
+                        
+                        <!-- AI Speech Bubble (Left Aligned) -->
+                        <div class="flex justify-start">
+                            <div class="chat-bubble-ai max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                                <p>안녕하세요! D-TECTIVE AI 탐정입니다. 탐지할 문자, 이미지, 뉴스를 알려주세요.</p>
+                            </div>
                         </div>
-                        <div class="bg-[#0d1322] border border-slate-800 text-slate-200 p-3 rounded-2xl rounded-tl-none max-w-[80%] leading-relaxed space-y-1">
-                            <p class="font-bold text-[#00f2fe]">안녕하세요! D-TECTIVE AI 탐정입니다.</p>
-                            <p>탐지된 스미싱, 딥페이크, 가짜뉴스에 대해 궁금하신 점을 질문해주세요.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Prompt Chips & Input Box -->
-                <div class="shrink-0 pt-2 border-t border-slate-800 space-y-2">
-                    <div class="flex items-center gap-2 overflow-x-auto pb-1 text-[10px]">
-                        <span class="text-slate-400 font-bold whitespace-nowrap"><i class="fa-solid fa-lightbulb mr-1 text-amber-400"></i>추천 질문:</span>
-                        <button onclick="sendP5ChatMessage('이 이미지는 딥페이크인가요?')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-[#00f2fe]/20 text-[#00f2fe] border border-slate-700 whitespace-nowrap transition">
-                            이 이미지는 딥페이크인가요?
-                        </button>
-                        <button onclick="sendP5ChatMessage('왜 위험하다고 판단했나요?')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-[#00f2fe]/20 text-[#00f2fe] border border-slate-700 whitespace-nowrap transition">
-                            왜 위험하다고 판단했나요?
-                        </button>
-                        <button onclick="sendP5ChatMessage('어떤 부분을 주의해야 하나요?')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-[#00f2fe]/20 text-[#00f2fe] border border-slate-700 whitespace-nowrap transition">
-                            어떤 부분을 주의해야 하나요?
-                        </button>
+                        <!-- User Speech Bubble (Right Aligned) -->
+                        <div class="flex justify-end">
+                            <div class="chat-bubble-user max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                                <p>의심되는 문자가 전달되었는데 스미싱 여부 분석 부탁드립니다.</p>
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="flex items-center gap-2 bg-[#0d1322] rounded-2xl p-1.5 border border-slate-700">
-                        <i class="fa-solid fa-comment-dots text-slate-400 ml-2.5 text-xs"></i>
-                        <input type="text" id="p5ChatInput" placeholder="AI 탐정에게 추가 질문을 입력하세요..." class="w-full bg-transparent px-2 py-1 text-xs text-white focus:outline-none" onkeypress="if(event.key==='Enter') triggerP5Chat()">
-                        <button onclick="triggerP5Chat()" class="px-4 py-1.5 rounded-xl bg-[#00f2fe] text-slate-950 font-black text-xs hover:brightness-110 transition shadow">
-                            질문하기
+                    <!-- BOTTOM INPUT BAR & SEND BUTTON -->
+                    <div class="flex items-center gap-3 pt-2 shrink-0">
+                        <div class="flex-1 bg-white rounded-full shadow-lg flex items-center px-5 py-2.5 sm:py-3 border border-transparent focus-within:border-[#00f2fe] transition">
+                            <input type="text" id="p5ChatInput" placeholder="메시지를 입력하세요..." class="w-full bg-transparent text-slate-900 placeholder-slate-400 text-xs sm:text-sm font-bold focus:outline-none" onkeypress="if(event.key==='Enter') triggerP5Chat()">
+                        </div>
+                        
+                        <!-- Right Arrow Send Icon Button -->
+                        <button onclick="triggerP5Chat()" class="text-white hover:scale-110 transition p-2 focus:outline-none shrink-0" title="전송">
+                            <svg viewBox="0 0 24 24" class="w-7 h-7 sm:w-8 sm:h-8 fill-current text-white transform rotate-45">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
                         </button>
                     </div>
+
                 </div>
 
             </div>
@@ -575,6 +563,139 @@
     <!-- ========================================================================= -->
     <!-- MODAL OVERLAYS & DIALOGS -->
     <!-- ========================================================================= -->
+
+    <!-- ================= [TECH EXPLANATION MODALS] ================= -->
+
+    <!-- [TECH MODAL 1: 스미싱 기술 및 기능 설명 모달] -->
+    <div id="smishingTechModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="info-modal-card bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-xl p-6 relative shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg font-bold border border-amber-500/30">
+                        <i class="fa-solid fa-bell-slash"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-black text-white">스미싱 문자 분석 기술 설명</h2>
+                        <p class="text-xs text-slate-400">AI 기반 악성 URL 탐지 및 금융사기 문맥 추론 기술</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('smishingTechModal')" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-200">
+                <div class="bg-[#0d1322] rounded-2xl p-4 border border-slate-800 space-y-2">
+                    <h3 class="font-bold text-[#00f2fe] flex items-center gap-1.5">
+                        <i class="fa-solid fa-microchip"></i>
+                        핵심 기능 및 탐지 방식
+                    </h3>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-300 text-[11px]">
+                        <li><strong class="text-white">악성 URL 평판 검사:</strong> 피싱 도메인 DB 및 단축 URL 우회 패턴을 실시간으로 추적·분석합니다.</li>
+                        <li><strong class="text-white">문맥 및 키워드 추출:</strong> 택배 사칭, 모바일 청첩장, 정부 지원금 등 사칭 문구의 위험도를 자연어 처리(NLP)로 파악합니다.</li>
+                        <li><strong class="text-white">피해 예방 가이드:</strong> 위협 수치와 함께 스미싱 대응 절차 및 AI 탐정 연동 상세 문의를 제공합니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTON: 사용하기 -->
+            <div class="pt-2 flex justify-end">
+                <button onclick="startSmishingUsage()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#00f2fe] hover:brightness-110 text-slate-950 font-black text-xs flex items-center justify-center gap-2 transition shadow-lg">
+                    <span>사용하기</span>
+                    <i class="fa-solid fa-comments"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- [TECH MODAL 2: 딥페이크 기술 및 기능 설명 모달] -->
+    <div id="deepfakeTechModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="info-modal-card bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-xl p-6 relative shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg font-bold border border-purple-500/30">
+                        <i class="fa-solid fa-glasses"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-black text-white">딥페이크 탐지 기술 설명</h2>
+                        <p class="text-xs text-slate-400">PyTorch Visual Mesh & Heatmap 픽셀 변조 분석</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('deepfakeTechModal')" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-200">
+                <div class="bg-[#0d1322] rounded-2xl p-4 border border-slate-800 space-y-2">
+                    <h3 class="font-bold text-purple-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-eye"></i>
+                        핵심 기능 및 탐지 방식
+                    </h3>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-300 text-[11px]">
+                        <li><strong class="text-white">얼굴 랜드마크 분석:</strong> PyTorch 기반 신경망 모델로 얼굴 68개 기하학적 랜드마크 픽셀의 오차를 검출합니다.</li>
+                        <li><strong class="text-white">Heatmap 가열도 오버레이:</strong> 인공지능이 생성하거나 수정한 피부 및 경계면 미세 합성 왜곡을 시각화합니다.</li>
+                        <li><strong class="text-white">신뢰도 평가:</strong> 인물 이미지/영상 딥페이크 합성 확률 수치를 정밀 판정합니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTON: 사용하기 -->
+            <div class="pt-2 flex justify-end">
+                <button onclick="startDeepfakeUsage()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#00f2fe] hover:brightness-110 text-slate-950 font-black text-xs flex items-center justify-center gap-2 transition shadow-lg">
+                    <span>사용하기</span>
+                    <i class="fa-solid fa-comments"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- [TECH MODAL 3: 가짜뉴스 기술 및 기능 설명 모달] -->
+    <div id="fakenewsTechModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="info-modal-card bg-[#161e31] border border-[#232f48] rounded-3xl w-full max-w-xl p-6 relative shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-lg font-bold border border-[#00f2fe]/30">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-black text-white">가짜뉴스 팩트체크 기술 설명</h2>
+                        <p class="text-xs text-slate-400">언론사 교차 검증 및 AI 출처 신뢰도 분석</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('fakenewsTechModal')" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs leading-relaxed text-slate-200">
+                <div class="bg-[#0d1322] rounded-2xl p-4 border border-slate-800 space-y-2">
+                    <h3 class="font-bold text-[#00f2fe] flex items-center gap-1.5">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                        핵심 기능 및 탐지 방식
+                    </h3>
+                    <ul class="list-disc list-inside space-y-1.5 text-slate-300 text-[11px]">
+                        <li><strong class="text-white">교차 보도 데이터 검색:</strong> 주요 정식 언론사 뉴스 DB와 대조하여 기사의 진위 여부를 교차 평가합니다.</li>
+                        <li><strong class="text-white">자극성/자극 제목 탐지:</strong> 선동성 문구, 자극적인 헤드라인 및 출처 미상 기사의 패턴을 파악합니다.</li>
+                        <li><strong class="text-white">Gemini AI LLM 팩트체크:</strong> AI 가 핵심 맥락을 요약하고 근거 자료와 신뢰 지수를 종합 제시합니다.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTON: 사용하기 -->
+            <div class="pt-2 flex justify-end">
+                <button onclick="startFakenewsUsage()" class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-[#00f2fe] hover:brightness-110 text-slate-950 font-black text-xs flex items-center justify-center gap-2 transition shadow-lg">
+                    <span>사용하기</span>
+                    <i class="fa-solid fa-comments"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= [FEATURE USAGE / ANALYSIS MODALS] ================= -->
 
     <!-- [MODAL 1: p.1-1_메인 - 스미싱 문자 분석 상세 모달] -->
     <div id="p1_1_smishingModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
@@ -812,7 +933,7 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">고객센터</h4>
                         <div class="space-y-2 text-xs font-bold pl-1">
-                            <!-- Clickable '공지사항' triggers p9_noticeModal (Condition 5) -->
+                            <!-- Clickable '공지사항' triggers p9_noticeModal -->
                             <button onclick="openModal('p9_noticeModal')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
                                 <i class="fa-solid fa-bullhorn text-sm text-slate-200 w-4"></i>
                                 <span>공지사항</span>
@@ -843,7 +964,7 @@
                     <div class="space-y-2.5">
                         <h4 class="text-[11px] font-bold text-slate-300">내 계정 관리</h4>
                         <div class="space-y-2 text-xs font-bold pl-1">
-                            <!-- Clickable '계정 설정' triggers p8_accountSettingsModal (Condition 4) -->
+                            <!-- Clickable '계정 설정' triggers p8_accountSettingsModal -->
                             <button onclick="openModal('p8_accountSettingsModal')" class="flex items-center gap-3 text-white hover:text-[#00f2fe] transition w-full text-left">
                                 <i class="fa-regular fa-circle-user text-sm text-slate-200 w-4"></i>
                                 <span>계정 설정</span>
@@ -897,7 +1018,7 @@
                 <!-- Puzzle Piece Theme Visual Options -->
                 <div class="grid grid-cols-2 gap-4 py-3 items-center justify-center text-center">
                     
-                    <!-- Choice 1: 라이트 Theme (Condition 6: Triggers system-wide light theme matching 스크린샷 2026-10-28 222828.png) -->
+                    <!-- Choice 1: 라이트 Theme (Triggers 2026-10-28 222828 color theme across all pages) -->
                     <div onclick="setAppTheme('light')" class="flex flex-col items-center cursor-pointer group">
                         <div id="boxThemeLight" class="w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80">
                             <!-- Puzzle Piece Graphic Light -->
@@ -1017,6 +1138,10 @@
     <script>
         let smishingChartInstance = null;
         let accordionExpanded = true;
+        let sessionCount = 1;
+
+        // Theme Preference Persistence Variable
+        let savedUserTheme = 'default'; // 'default' or 'light'
 
         // Toggle All Terms Checkbox for Sign-up Modal
         function toggleAllTerms(source) {
@@ -1051,7 +1176,7 @@
             }
         }
 
-        // Modal Open/Close
+        // Modal Open/Close Base Logic
         function openModal(modalId) {
             const target = document.getElementById(modalId);
             if(target) {
@@ -1069,8 +1194,78 @@
             }
         }
 
-        // System-wide Theme Switcher for p.7_homeScreenModal (Light Theme matching 스크린샷 2026-10-28 222828.png)
-        function setAppTheme(themeType) {
+        // =========================================================================
+        // CONDITIONS 5 & 6: Tech Info Modals & Usage Routing to AI Chat
+        // =========================================================================
+        function openSmishingTechInfo() {
+            openModal('smishingTechModal');
+        }
+
+        function startSmishingUsage() {
+            closeModal('smishingTechModal');
+            showScreen('p5_aichat');
+            appendAISystemMessage('스미싱 분석 모드입니다. 의심되는 문자 내용이나 URL을 입력해주세요.');
+        }
+
+        function openDeepfakeTechInfo() {
+            openModal('deepfakeTechModal');
+        }
+
+        function startDeepfakeUsage() {
+            closeModal('deepfakeTechModal');
+            showScreen('p5_aichat');
+            appendAISystemMessage('딥페이크 탐지 모드입니다. 검사하고 싶으신 이미지나 질문을 입력해주세요.');
+        }
+
+        function openFakenewsTechInfo() {
+            openModal('fakenewsTechModal');
+        }
+
+        function startFakenewsUsage() {
+            closeModal('fakenewsTechModal');
+            showScreen('p5_aichat');
+            appendAISystemMessage('가짜뉴스 팩트체크 모드입니다. 검증하고 싶으신 뉴스 제목이나 링크를 입력해주세요.');
+        }
+
+        function createNewAIChatSession() {
+            sessionCount++;
+            const list = document.getElementById('aiDetectiveList');
+            if(list) {
+                const item = document.createElement('div');
+                item.className = "p-2.5 rounded-xl bg-black/20 text-white flex items-center gap-2 border border-white/20 hover:bg-black/30 cursor-pointer transition";
+                item.innerHTML = `<i class="fa-solid fa-user-secret text-xs"></i><span class="truncate">새 대화 세션 ${sessionCount}</span>`;
+                list.appendChild(item);
+            }
+            const chatLog = document.getElementById('p5ChatLog');
+            if(chatLog) {
+                chatLog.innerHTML = `
+                    <div class="flex justify-start">
+                        <div class="chat-bubble-ai max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                            <p>새로운 대화 세션이 시작되었습니다. 무엇을 탐지해드릴까요?</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function appendAISystemMessage(text) {
+            const chatLog = document.getElementById('p5ChatLog');
+            if(!chatLog) return;
+            const bubble = document.createElement('div');
+            bubble.className = "flex justify-start";
+            bubble.innerHTML = `
+                <div class="chat-bubble-ai max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                    <p>${text}</p>
+                </div>
+            `;
+            chatLog.appendChild(bubble);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // =========================================================================
+        // Theme Switcher & Login/Logout Persistence Logic
+        // =========================================================================
+        function applyThemeToDOM(themeType) {
             const body = document.getElementById('appBody');
             const radioLight = document.getElementById('radioThemeLight');
             const radioDefault = document.getElementById('radioThemeDefault');
@@ -1090,6 +1285,35 @@
                 if (boxLight) boxLight.className = "w-20 h-16 relative bg-white/20 rounded-xl p-1.5 mb-2 flex items-center justify-center border border-white/20 transition opacity-80";
                 if (boxDefault) boxDefault.className = "w-20 h-16 relative bg-black/30 rounded-xl p-1.5 mb-2 flex items-center justify-center border-2 border-white shadow-lg transition";
             }
+        }
+
+        function setAppTheme(themeType) {
+            savedUserTheme = themeType;
+            applyThemeToDOM(themeType);
+        }
+
+        // Simulated Login Logic
+        function loginSimulate() {
+            document.getElementById('headerAuthLoggedOut').classList.add('hidden');
+            document.getElementById('headerAuthLoggedIn').classList.remove('hidden');
+            closeModal('p2_loginModal');
+            showScreen('p4_main');
+
+            // Re-apply light theme if previously selected
+            if (savedUserTheme === 'light') {
+                applyThemeToDOM('light');
+            }
+        }
+
+        // Simulated Logout Logic
+        function logoutSimulate() {
+            document.getElementById('headerAuthLoggedIn').classList.add('hidden');
+            document.getElementById('headerAuthLoggedOut').classList.remove('hidden');
+            
+            // Revert back to default dark color on logout
+            applyThemeToDOM('default');
+
+            showScreen('p1_main');
         }
 
         // Render Donut Chart
@@ -1117,49 +1341,54 @@
             });
         }
 
-        // Simulated Login/Logout
-        function loginSimulate() {
-            document.getElementById('headerAuthLoggedOut').classList.add('hidden');
-            document.getElementById('headerAuthLoggedIn').classList.remove('hidden');
-            closeModal('p2_loginModal');
-            showScreen('p4_main');
-        }
-
-        function logoutSimulate() {
-            document.getElementById('headerAuthLoggedIn').classList.add('hidden');
-            document.getElementById('headerAuthLoggedOut').classList.remove('hidden');
-            showScreen('p1_main');
-        }
-
-        // AI Chat Simulation
+        // AI Chat Simulation (Generates matching speech bubbles)
         function sendP5ChatMessage(text) {
             const chatLog = document.getElementById('p5ChatLog');
+            if(!chatLog) return;
+
             const userBubble = document.createElement('div');
-            userBubble.className = "flex gap-2 justify-end items-start";
-            userBubble.innerHTML = `<div class="bg-[#00f2fe] text-slate-950 font-bold p-2.5 rounded-2xl text-xs">${text}</div>`;
+            userBubble.className = "flex justify-end";
+            userBubble.innerHTML = `
+                <div class="chat-bubble-user max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                    <p>${text}</p>
+                </div>
+            `;
             chatLog.appendChild(userBubble);
             chatLog.scrollTop = chatLog.scrollHeight;
+
+            setTimeout(() => {
+                const aiBubble = document.createElement('div');
+                aiBubble.className = "flex justify-start";
+                aiBubble.innerHTML = `
+                    <div class="chat-bubble-ai max-w-[75%] sm:max-w-[65%] p-3.5 sm:p-4 shadow-md leading-relaxed font-bold">
+                        <p>입력하신 정보를 바탕으로 정밀 추론을 수행했습니다. 상세 결과를 확인하시겠습니까?</p>
+                    </div>
+                `;
+                chatLog.appendChild(aiBubble);
+                chatLog.scrollTop = chatLog.scrollHeight;
+            }, 600);
         }
 
         function triggerP5Chat() {
             const input = document.getElementById('p5ChatInput');
-            if(input.value.trim()) {
+            if(input && input.value.trim()) {
                 sendP5ChatMessage(input.value.trim());
                 input.value = '';
             }
         }
 
         function runUnifiedSearch() {
-            openModal('p1_1_smishingModal');
+            openSmishingTechInfo();
         }
 
         function toggleDemoVideo() {
             const videoBox = document.getElementById('videoPlayerBox');
-            videoBox.classList.toggle('hidden');
+            if(videoBox) videoBox.classList.toggle('hidden');
         }
 
         function toggleErrorBanner() {
-            document.getElementById('errorBanner').classList.toggle('hidden');
+            const banner = document.getElementById('errorBanner');
+            if(banner) banner.classList.toggle('hidden');
         }
     </script>
 
