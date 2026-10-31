@@ -239,7 +239,7 @@
 
     <!-- MAIN TOP HEADER -->
     <header class="w-full bg-[#03060c] py-3.5 px-6 sm:px-12 shrink-0 z-40 border-b border-slate-900">
-        <div class="max-w-[1100px] mx-auto flex items-center justify-between">
+        <div class="max-w-[1240px] mx-auto flex items-center justify-between">
             
             <!-- LEFT SIDE: Pill-shaped Login/Welcome Button & Logout -->
             <div class="flex items-center gap-6">
@@ -277,26 +277,26 @@
         </div>
     </header>
 
-    <!-- MAIN APP CANVAS (16:9 Widescreen Fixed Canvas Ratio) -->
-    <main class="flex-1 w-full max-w-[1100px] mx-auto px-4 sm:px-6 py-4 flex flex-col justify-center overflow-hidden relative">
+    <!-- MAIN APP CANVAS (Expanded max width & fluid aspect spacing) -->
+    <main class="flex-1 w-full max-w-[1240px] mx-auto px-4 sm:px-8 py-3 flex flex-col justify-center overflow-hidden relative">
 
         <!-- ================= [PAGE 1: MAIN LANDING HERO (p.1_메인)] ================= -->
-        <section id="screen_p1_main" class="app-screen flex-1 flex flex-col justify-center py-2 space-y-4">
+        <section id="screen_p1_main" class="app-screen flex-1 flex flex-col justify-center py-2">
             
-            <!-- HERO VIDEO & TITLE CONTAINER -->
-            <div id="heroCard" class="bg-[#161e31] rounded-3xl p-6 sm:p-8 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto min-h-[360px] max-w-3xl mx-auto w-full">
-                <div class="max-w-2xl mx-auto w-full space-y-5">
+            <!-- HERO VIDEO & TITLE CONTAINER (Expanded Size & 16:9 Video Box per Condition 5) -->
+            <div id="heroCard" class="bg-[#161e31] rounded-3xl p-5 sm:p-7 text-center border border-[#232f48] relative overflow-hidden shadow-2xl flex flex-col justify-center my-auto w-full max-w-5xl mx-auto">
+                <div class="max-w-4xl mx-auto w-full space-y-4">
                     
-                    <!-- PROTOTYPE VIDEO DISPLAY BOX -->
-                    <div id="videoContainer" onclick="toggleDemoVideo()" class="bg-[#0d1322]/90 rounded-2xl p-5 border border-slate-700 shadow-inner flex flex-col items-center justify-center min-h-[180px] relative group cursor-pointer transition-all hover:border-[#00f2fe]">
-                        <div id="videoPlaceholder" class="space-y-2">
-                            <div class="w-11 h-11 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-xl mx-auto border border-[#00f2fe]/40 group-hover:scale-110 transition shadow-lg">
-                                <i class="fa-solid fa-play ml-0.5"></i>
+                    <!-- PROTOTYPE VIDEO DISPLAY BOX (16:9 Aspect Ratio & Expanded Frame with Cyan Accent Border) -->
+                    <div id="videoContainer" onclick="toggleDemoVideo()" class="bg-[#0d1322]/95 rounded-2xl p-4 border-2 border-[#00f2fe]/70 shadow-[0_0_20px_rgba(0,242,254,0.15)] flex flex-col items-center justify-center aspect-[16/9] w-full relative group cursor-pointer transition-all hover:border-[#00f2fe] overflow-hidden">
+                        <div id="videoPlaceholder" class="space-y-3 text-center my-auto">
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#00f2fe]/20 text-[#00f2fe] flex items-center justify-center text-2xl sm:text-3xl mx-auto border border-[#00f2fe]/50 group-hover:scale-110 transition shadow-lg">
+                                <i class="fa-solid fa-play ml-1"></i>
                             </div>
-                            <p class="text-base sm:text-lg font-black text-white tracking-wide">
+                            <p class="text-xl sm:text-2xl font-black text-white tracking-wide">
                                 기능 및 웹서비스 소개 영상(로고)
                             </p>
-                            <p class="text-xs text-slate-400">클릭하여 D-TECTIVE 웹서비스 시연 영상 재생</p>
+                            <p class="text-xs sm:text-sm text-slate-400 font-medium">클릭하여 D-TECTIVE 웹서비스 시연 영상 재생</p>
                         </div>
 
                         <!-- Video Element Overlay -->
@@ -304,7 +304,7 @@
                             <video id="demoVideo" class="w-full h-full rounded-xl object-cover" controls>
                                 <source src="https://assets.mixkit.co/videos/preview/mixkit-cyber-security-code-running-on-screen-41551-large.mp4" type="video/mp4">
                             </video>
-                            <button onclick="event.stopPropagation(); toggleDemoVideo()" class="absolute top-3 right-3 text-white bg-slate-800/90 p-1.5 rounded-full text-xs hover:bg-slate-700">
+                            <button onclick="event.stopPropagation(); toggleDemoVideo()" class="absolute top-3 right-3 text-white bg-slate-800/90 p-2 rounded-full text-xs hover:bg-slate-700 z-20">
                                 <i class="fa-solid fa-xmark"></i>
                             </button>
                         </div>
@@ -321,11 +321,11 @@
                     </div>
 
                     <!-- UNIFIED SEARCH BAR -->
-                    <div class="max-w-md mx-auto">
-                        <div class="bg-[#0d1322] rounded-2xl p-1.5 shadow-xl flex items-center gap-2 border border-slate-700">
-                            <i class="fa-solid fa-magnifying-glass text-slate-400 ml-3 text-xs"></i>
-                            <input type="text" id="unifiedInput" placeholder="의심되는 문자, 뉴스 제목 또는 URL을 입력하세요..." class="w-full bg-transparent text-xs text-white placeholder-slate-500 focus:outline-none py-1.5">
-                            <button onclick="runUnifiedSearch()" class="px-4 py-1.5 rounded-xl bg-[#00f2fe] text-slate-950 font-black text-xs whitespace-nowrap hover:brightness-110 transition shadow">
+                    <div class="max-w-xl mx-auto">
+                        <div class="bg-[#0d1322] rounded-2xl p-2 shadow-xl flex items-center gap-2 border border-slate-700">
+                            <i class="fa-solid fa-magnifying-glass text-slate-400 ml-3 text-xs sm:text-sm"></i>
+                            <input type="text" id="unifiedInput" placeholder="의심되는 문자, 뉴스 제목 또는 URL을 입력하세요..." class="w-full bg-transparent text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none py-1.5">
+                            <button onclick="runUnifiedSearch()" class="px-5 py-2 rounded-xl bg-[#00f2fe] text-slate-950 font-black text-xs sm:text-sm whitespace-nowrap hover:brightness-110 transition shadow">
                                 통합 탐지 시작
                             </button>
                         </div>
@@ -549,7 +549,7 @@
 
     <!-- FOOTER BAR -->
     <footer class="bg-[#03060c] py-2 text-center text-[11px] text-[#00f2fe] font-extrabold shrink-0 border-t border-slate-900">
-        <div class="max-w-[1100px] mx-auto px-4 flex items-center justify-center relative">
+        <div class="max-w-[1240px] mx-auto px-4 flex items-center justify-center relative">
             <p class="tracking-wider text-center">D-TECTIVE K2J1 &nbsp; 24730030 정제현 25730029 김다영 25730022 김지은</p>
             <div class="absolute right-4 flex items-center gap-3 text-slate-500 text-[10px] font-normal">
                 <button onclick="toggleErrorBanner()" class="hover:text-amber-400 transition">에러 테스트</button>
